@@ -1,35 +1,20 @@
 #include <iostream>
-#include "UCI.h"
-#include "Options.h"
 #include <string>
-#include "Position.h"
-#include "Bitboard.h"
-
-#define setBit(bitboard, square) (bitboard |= (1ULL << (square - 1)))
+#include <map>
+#include "UCI/UCIParser.h"
+#include "UCI/UCIExecutor.h"
+#include "UCI/Options/Options.h"
 
 using namespace std;
-using namespace Board;
-using namespace UCI::Options;
-using namespace Bitboards;
 
-OptionsMap options;
-Position position;
+map<string, string> options;
 
-int main()
-{
-	cout << "Initializing...\n";
-	options = UCI::init();
-	position.showPosition();
-	Bitboards::init();
-	cout << endl;
+int main(){
+    UCI::Options::init(&options);
+    UCI::Executor::init();
 
-	cout << "Ready\n";
-	
-	inputStart:
-		string cmd;
-		getline(cin, cmd);
-		UCI::runCommand(cmd, options, position);
-		goto inputStart;
-
-	return 0;
+    string cmd;
+    getline(cin, cmd);
+    UCI::parseUCICommand(cmd);
+    return 0;
 }
