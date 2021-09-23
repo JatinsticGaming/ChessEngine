@@ -18,6 +18,8 @@ int main(){
     Board board;
     board.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
     board.print();
+    board.move(Move(SqCoord::A1, SqCoord::E4));
+    board.print();
 
     string cmd;
     getline(cin, cmd);

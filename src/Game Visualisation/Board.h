@@ -115,9 +115,32 @@ namespace Game{
         }
     }
 
+    class Move{
+        public:
+            SqCoord from;
+            SqCoord to;
+            Move(SqCoord from, SqCoord to){
+                this->from = from;
+                this->to = to;
+            }
+    };
+    class MoveHandler{
+        private:
+            Square (*pieces)[64];
+        public:
+            MoveHandler(Square (*boardPtr)[64]){
+                pieces = boardPtr;
+            }
+            void performMove(Move move){
+                (*pieces)[(int)move.to - 1] = (*pieces)[(int)move.from - 1];
+                (*pieces)[(int)move.from].clear();
+            }
+    };
+
     class Board{
         private:
             Square squares[64];
+            MoveHandler moveHandler = MoveHandler(&squares);
         public:
             void clear(){
                 for(int i = 0; i < 64; i++){
@@ -137,6 +160,9 @@ namespace Game{
                         cout << endl; 
                     }
                 }
+            }
+            void move(Move move){
+                moveHandler.performMove(move);
             }
     };
 }
