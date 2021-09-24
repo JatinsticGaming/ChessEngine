@@ -149,7 +149,7 @@ namespace Bitboards{
             magic.mask = generateSliderAttack(type, (SqCoord)(64 - s), 0ULL) & ~_edges;
             magic.shift = 64 - popcount(magic.mask);
 
-            magic.aptr = (SqCoordMAGIC)s == SqCoordMAGIC::A1 ? attackTable : magics[s - 2].aptr + size;
+            magic.aptr = (SqCoordMAGIC)s == SqCoordMAGIC::A1 ? attackTable : magics[s - 1].aptr + size;
 
             b = size = 0;
             do{
