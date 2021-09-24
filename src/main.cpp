@@ -5,6 +5,7 @@
 #include "UCI.h"
 #include "Board.h"
 #include "Square.h"
+#include "Bitboard.h"
 
 using namespace std;
 using namespace UCIOptions;
@@ -12,11 +13,10 @@ using namespace Board;
 
 OptionsMap _options;
 OptionsMap& options = _options;
-Board::Board board;
 
 int main(){
-    board.print();
     UCIOptions::init();
+    Bitboards::init();
     UCI::init();
     return 0;
 }
