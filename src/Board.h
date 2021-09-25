@@ -11,7 +11,9 @@ using namespace Board;
 namespace Board{
     enum Direction : int{
         NORTH = 8, SOUTH = -NORTH,
-        EAST = 1, WEST = -EAST
+        EAST = 1, WEST = -EAST,
+        NORTHWEST = NORTH + WEST, NORTHEAST = NORTH + EAST,
+        SOUTHWEST = SOUTH - WEST, SOUTHEAST = SOUTH - EAST,
     };
 
     void parseAndLoad(Square (*board)[64], string fen){
@@ -76,6 +78,7 @@ namespace Board{
         public:
             SqCoord from;
             SqCoord to;
+            Move(){};
             Move(SqCoord from, SqCoord to){
                 this->from = from;
                 this->to = to;
